@@ -1,13 +1,19 @@
-<h2>Liste des personnages</h2>
+<h2>Détails du personnage</h2>
+<label for="idInput">ID du personnage :</label>
+<input id="idInput" type="number" [(ngModel)]="id" min="1" />
+<button (click)="search()">Rechercher</button>
+
 <div *ngIf="loading">Chargement...</div>
 <div *ngIf="error" style="color:red;">{{ error }}</div>
-<table *ngIf="!loading && !error">
-  <tr>
-    <th>ID</th>
-    <th>Nom</th>
-  </tr>
-  <tr *ngFor="let c of characters">
-    <td>{{ c.id }}</td>
-    <td>{{ c.name }}</td>
-  </tr>
-</table>
+
+<div *ngIf="character">
+  <h3>{{ character.name }}</h3>
+  <img [src]="character.image" [alt]="character.name" width="200" />
+  <ul>
+    <li><strong>Status :</strong> {{ character.status }}</li>
+    <li><strong>Espèce :</strong> {{ character.species }}</li>
+    <li><strong>Genre :</strong> {{ character.gender }}</li>
+    <li><strong>Origine :</strong> {{ character.origin?.name }}</li>
+    <li><strong>Localisation :</strong> {{ character.location?.name }}</li>
+  </ul>
+</div>
